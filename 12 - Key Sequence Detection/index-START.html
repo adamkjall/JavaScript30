@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+
+  const pushedKeys = [];
+  const secret = "420"
+  window.addEventListener("keyup", (e) => {
+    pushedKeys.push(e.key);
+
+    pushedKeys.splice(0, pushedKeys.length - secret.length); 
+    console.log(pushedKeys);
+    
+    if (pushedKeys.join("").includes(secret)) {
+      alert("Lalala lalalaa lalala ")
+    }
+  })
+
 </script>
 </body>
 </html>
