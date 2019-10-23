@@ -29,12 +29,45 @@
   }
 
   h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    text-shadow: 10px 10px 10px rgba(0, 16, 176, 0.5);
     font-size: 100px;
   }
   </style>
 
 <script>
+
+  const hero = document.querySelector(".hero");
+  const text = document.querySelector(".hero h1");
+
+  const walk = 1000;
+
+  const shadow = e => {
+    const width = hero.offsetWidth;
+    const height = hero.offsetHeight;
+    let x = e.offsetX;
+    let y = e.offsetY;
+
+    if (e.currentTarget !== e.target) {
+      x += e.target.offsetLeft;
+      y += e.target.offsetTop;
+    }
+
+    const xWalk = Math.round((x / width * walk) - (walk / 2));
+    const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+    text.style.textShadow = 
+      `${xWalk}px ${yWalk}px 0px rgba(0, 16, 176, 0.5),
+      ${-1*xWalk}px ${-1*yWalk}px 0px rgba(255, 16, 176, 0.5),
+      ${-1*xWalk}px ${yWalk}px 0px rgba(255, 0, 1, 0.5),
+      ${xWalk}px ${-1*yWalk}px 0px rgba(5, 160, 1, 0.5)`
+      ;
+
+    
+    
+  }
+
+  hero.addEventListener("mousemove", shadow);
+
 </script>
 </body>
 </html>
