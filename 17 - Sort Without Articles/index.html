@@ -1,0 +1,57 @@
+<body>
+<!--
+  TODO Sort the array of band names without the article word and insert
+  them as <li> child elements to the <ul> with id "bands". 
+  E.g input  ["The Who", "The Mamas and the Papas", "Arctic Monkeys"]
+      output 
+        * Arctic Monkeys 
+        * The Mamas and the Papas
+        * The Who
+-->
+<ul id="bands"></ul>
+
+<script>
+  const bands = [
+    "The Plot in You",
+    "The Devil Wears Prada",
+    "Pierce the Veil",
+    "Norma Jean",
+    "The Bled",
+    "Say Anything",
+    "The Midway State",
+    "We Came as Romans",
+    "Counterparts",
+    "Oh, Sleeper",
+    "A Skylit Drive",
+    "Anywhere But Here",
+    "An Old Dog",
+  ];
+
+  const bandList = document.getElementById("bands");
+
+  // Check if input is any of "A", "An" or "The"
+  const isArticle = word => {
+    const articles = ["A", "An", "The"];
+    return articles.find(article => word === article) ? true : false;
+  };
+
+  const compareBands = (bandA, bandB) => {
+    const arrA = bandA.split(" ");
+    const arrB = bandB.split(" ");
+
+    const indexA = isArticle(arrA[0]) ? 1 : 0;
+    const indexB = isArticle(arrB[0]) ? 1 : 0;
+
+    const bandNameA = arrA.slice(indexA, arrA.length).join("").toLowerCase();
+    const bandNameB = arrB.slice(indexB, arrB.length).join("").toLowerCase();
+  
+    return bandNameA < bandNameB ? -1 : bandNameB > bandNameA ? 1 : 0;
+  };
+
+  bandList.innerHTML = bands
+    .sort((a, b) => compareBands(a, b))
+    .map(band => `<li>${band}</li>`)
+    .join("");
+    
+</script>
+</body>
