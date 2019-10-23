@@ -1,7 +1,7 @@
 <body>
 <!--
-  TODO Sort the array of band names without the article word and insert
-  them as <li> child elements to the <ul> with id "bands". 
+  TODO Sort the array of band names without the article word (A, An or The)
+  and insert them as <li> child elements to the <ul> with the id of "bands". 
   E.g input  ["The Who", "The Mamas and the Papas", "Arctic Monkeys"]
       output 
         * Arctic Monkeys 
@@ -27,9 +27,6 @@
     "An Old Dog",
   ];
 
-  const bandList = document.getElementById("bands");
-
-  // Check if input is any of "A", "An" or "The"
   const isArticle = word => {
     const articles = ["A", "An", "The"];
     return articles.find(article => word === article) ? true : false;
@@ -48,7 +45,7 @@
     return bandNameA < bandNameB ? -1 : bandNameB > bandNameA ? 1 : 0;
   };
 
-  bandList.innerHTML = bands
+  document.getElementById("bands").innerHTML = bands
     .sort((a, b) => compareBands(a, b))
     .map(band => `<li>${band}</li>`)
     .join("");

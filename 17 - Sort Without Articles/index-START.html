@@ -60,31 +60,13 @@
         "An Old Dog"
       ];
 
-      const bandList = document.getElementById("bands");
+      const strip = bandName => bandName.replace(/^(a |the |an )/i, "");
 
-      const isArticle = word => {
-        const articles = ["A", "An", "The"];
-        return articles.find(article => word === article) ? true : false;
-      };
+      const sortedBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1));
 
-      const compareBands = (bandA, bandB) => {
-        const arrA = bandA.split(" ");
-        const arrB = bandB.split(" ");
-
-        const indexA = isArticle(arrA[0]) ? 1 : 0;
-        const indexB = isArticle(arrB[0]) ? 1 : 0;
-
-        const wordA = arrA[indexA].toLowerCase();
-        const wordB = arrB[indexB].toLowerCase();
-
-        return wordA < wordB ? -1 : wordB > wordA ? 1 : 0;
-      };
-
-      bandList.innerHTML = bands
-        .sort((a, b) => compareBands(a, b))
+      document.querySelector("#bands").innerHTML = sortedBands
         .map(band => `<li>${band}</li>`)
         .join("");
-        
     </script>
   </body>
 </html>
